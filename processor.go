@@ -23,7 +23,7 @@ func processExcel(excel *Excel, cells []string) []string {
 	cols := make([]string, len(cells))
 	for index, cell := range cells {
 		cellSlice := strings.Split(cell, "!")
-		value := excel.GetCellValue(cellSlice[0], cellSlice[1])
+		value, _ := excel.GetCellValue(cellSlice[0], cellSlice[1])
 		cols[index] = value
 	}
 	return cols
