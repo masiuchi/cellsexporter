@@ -1,6 +1,6 @@
 package main
 
-import "github.com/masiuchi/cellsexporter"
+import "cellsexporter"
 
 func main() {
 	args := cellsexporter.ParseArgs()
