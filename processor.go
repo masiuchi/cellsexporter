@@ -11,7 +11,7 @@ func ProcessFiles(args *Args) {
 	for _, file := range args.Files {
 		excel, err := LoadExcel(file)
 		if err != nil {
-			continue
+			panic(err)
 		}
 		data[dataIndex] = processExcel(excel, args.Cells)
 		dataIndex = dataIndex + 1
@@ -23,7 +23,10 @@ func processExcel(excel *Excel, cells []string) []string {
 	cols := make([]string, len(cells))
 	for index, cell := range cells {
 		cellSlice := strings.Split(cell, "!")
-		value, _ := excel.GetCellValue(cellSlice[0], cellSlice[1])
+		value, err := excel.GetCellValue(cellSlice[0], cellSlice[1])
+		if err != nil {
+			panic(err)
+		}
 		cols[index] = value
 	}
 	return cols
