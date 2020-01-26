@@ -1,6 +1,8 @@
 package excelexporter
 
 import (
+	"fmt"
+	"os"
 	"strings"
 )
 
@@ -23,9 +25,11 @@ func processExcel(excel *Excel, cells []string) []string {
 	cols := make([]string, len(cells))
 	for index, cell := range cells {
 		cellSlice := strings.Split(cell, "!")
-		value, err := excel.GetCellValue(cellSlice[0], cellSlice[1])
+		sheet := cellSlice[0]
+		cellAxis := cellSlice[1]
+		value, err := excel.GetCellValue(sheet, cellAxis)
 		if err != nil {
-			panic(err)
+			fmt.Fprintln(os.Stderr, err)
 		}
 		cols[index] = value
 	}
