@@ -1,4 +1,4 @@
-module cellsexporter
+module excelexporter
 
 go 1.13
 

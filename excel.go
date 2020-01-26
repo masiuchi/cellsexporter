@@ -1,4 +1,4 @@
-package cellsexporter
+package excelexporter
 
 import "github.com/360EntSecGroup-Skylar/excelize/v2"
 

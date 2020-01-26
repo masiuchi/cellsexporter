@@ -1,4 +1,4 @@
-package cellsexporter
+package excelexporter
 
 import (
 	"flag"
