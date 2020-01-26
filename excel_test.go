@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestSheet1(t *testing.T) {
+func TestToGetCellValuesFromSheet(t *testing.T) {
 	excel := getExcel()
 
 	a1, err := excel.GetCellValue("Sheet1", "A1")
@@ -51,7 +51,7 @@ func TestSheet1(t *testing.T) {
 	}
 }
 
-func TestSheet2(t *testing.T) {
+func TestToGetCellValuesFromOtherSheet(t *testing.T) {
 	excel := getExcel()
 
 	a1, err := excel.GetCellValue("Sheet2", "A1")
@@ -79,7 +79,7 @@ func TestSheet2(t *testing.T) {
 	}
 }
 
-func TestSheet3(t *testing.T) {
+func TestWithNotExistingSheet(t *testing.T) {
 	excel := getExcel()
 
 	a1, err := excel.GetCellValue("Sheet3", "A1")
