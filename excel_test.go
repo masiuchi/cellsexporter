@@ -5,41 +5,49 @@ import (
 )
 
 func TestToGetCellValuesFromSheet(t *testing.T) {
+	testToGetCellValuesCommon("Sheet1", t)
+}
+
+func TestToGetCellValuesFromActiveSheet(t *testing.T) {
+	testToGetCellValuesCommon("", t)
+}
+
+func testToGetCellValuesCommon(sheet string, t *testing.T) {
 	excel := getExcel()
 
-	a1, err := excel.GetCellValue("Sheet1", "A1")
+	a1, err := excel.GetCellValue(sheet, "A1")
 	if err != nil {
 		panic(err)
 	}
 	if a1 != "" {
-		t.Error("Sheet1!A1 is not empty")
+		t.Error("A1 is not empty")
 	}
 
-	b2, err := excel.GetCellValue("Sheet1", "B2")
+	b2, err := excel.GetCellValue(sheet, "B2")
 	if err != nil {
 		panic(err)
 	}
 	if b2 != "a" {
-		t.Error("Sheet!B2 is wrong: ", b2)
+		t.Error("B2 is wrong: ", b2)
 	}
 
-	b4, err := excel.GetCellValue("Sheet1", "B4")
+	b4, err := excel.GetCellValue(sheet, "B4")
 	if err != nil {
 		panic(err)
 	}
 	if b4 != "1" {
-		t.Error("Sheet1!B4 is wrong: ", b4)
+		t.Error("B4 is wrong: ", b4)
 	}
 
-	d3, err := excel.GetCellValue("Sheet1", "D3")
+	d3, err := excel.GetCellValue(sheet, "D3")
 	if err != nil {
 		panic(err)
 	}
 	if d3 != "あ" {
-		t.Error("Sheet1!D3 is wrong: ", d3)
+		t.Error("D3 is wrong: ", d3)
 	}
 
-	d6, err := excel.GetCellValue("Sheet1", "D6")
+	d6, err := excel.GetCellValue(sheet, "D6")
 	if err != nil {
 		panic(err)
 	}
@@ -47,7 +55,7 @@ func TestToGetCellValuesFromSheet(t *testing.T) {
 1
 22`
 	if d6 != expected {
-		t.Error("Sheet1!D6 is wrong: ", d6)
+		t.Error("D6 is wrong: ", d6)
 	}
 }
 

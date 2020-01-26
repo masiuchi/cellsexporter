@@ -17,6 +17,14 @@ func LoadExcel(filename string) (*Excel, error) {
 }
 
 // GetCellValue ...
-func (e *Excel) GetCellValue(sheet, axis string) (string, error) {
-	return e.file.GetCellValue(sheet, axis)
+func (e *Excel) GetCellValue(sheet, cellAxis string) (string, error) {
+	if sheet == "" {
+		sheet = e.getActiveSheetName()
+	}
+	return e.file.GetCellValue(sheet, cellAxis)
+}
+
+func (e *Excel) getActiveSheetName() string {
+	index := e.file.GetActiveSheetIndex()
+	return e.file.GetSheetName(index)
 }
