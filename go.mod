@@ -1,4 +1,4 @@
-module excelexporter
+module excelpicker
 
 go 1.13
 

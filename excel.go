@@ -1,4 +1,4 @@
-package excelexporter
+package excelpicker
 
 import "github.com/360EntSecGroup-Skylar/excelize/v2"
 

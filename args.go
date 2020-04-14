@@ -1,4 +1,4 @@
-package excelexporter
+package excelpicker
 
 import (
 	"flag"
