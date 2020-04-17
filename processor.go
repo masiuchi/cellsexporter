@@ -25,8 +25,14 @@ func processExcel(excel *Excel, cells []string) []string {
 	cols := make([]string, len(cells))
 	for index, cell := range cells {
 		cellSlice := strings.Split(cell, "/")
-		sheet := cellSlice[0]
-		cellAxis := cellSlice[1]
+		var sheet, cellAxis string
+		if len(cellSlice) >= 2 {
+			sheet = cellSlice[0]
+			cellAxis = cellSlice[1]
+		} else {
+			sheet = ""
+			cellAxis = cellSlice[0]
+		}
 		value, err := excel.GetCellValue(sheet, cellAxis)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)

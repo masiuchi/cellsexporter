@@ -7,4 +7,8 @@ clean:
 test:
 	go test
 
-.PHONY: build clean test
+test-cmd:
+	./excel-picker --file=test.xlsx --cell=Sheet1/B2
+	./excel-picker --file=test.xlsx --cell=B2
+
+.PHONY: build clean test test-cmd
