@@ -15,24 +15,16 @@ func ProcessFiles(args *Args) {
 		if err != nil {
 			panic(err)
 		}
-		data[dataIndex] = processExcel(excel, args.Cells)
+		data[dataIndex] = pickCellValuesFromExcel(excel, args.Cells)
 		dataIndex = dataIndex + 1
 	}
 	PrintAsCsv(args.GetHeaders(), data)
 }
 
-func processExcel(excel *Excel, cells []string) []string {
+func pickCellValuesFromExcel(excel *Excel, cells []string) []string {
 	cols := make([]string, len(cells))
 	for index, cell := range cells {
-		cellSlice := strings.Split(cell, "/")
-		var sheet, cellAxis string
-		if len(cellSlice) >= 2 {
-			sheet = cellSlice[0]
-			cellAxis = cellSlice[1]
-		} else {
-			sheet = ""
-			cellAxis = cellSlice[0]
-		}
+		sheet, cellAxis := parseCellArgument(cell)
 		value, err := excel.GetCellValue(sheet, cellAxis)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -40,4 +32,17 @@ func processExcel(excel *Excel, cells []string) []string {
 		cols[index] = value
 	}
 	return cols
+}
+
+func parseCellArgument(cell string) (string, string) {
+	cellSlice := strings.Split(cell, "/")
+	var sheet, cellAxis string
+	if len(cellSlice) >= 2 {
+		sheet = cellSlice[0]
+		cellAxis = cellSlice[1]
+	} else {
+		sheet = ""
+		cellAxis = cellSlice[0]
+	}
+	return sheet, cellAxis
 }
