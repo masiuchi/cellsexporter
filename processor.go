@@ -15,13 +15,13 @@ func ProcessFiles(args *Args) {
 		if err != nil {
 			panic(err)
 		}
-		data[dataIndex] = pickCellValuesFromExcel(excel, args.Cells)
+		data[dataIndex] = pickCellValues(excel, args.Cells)
 		dataIndex = dataIndex + 1
 	}
 	PrintAsCsv(args.GetHeaders(), data)
 }
 
-func pickCellValuesFromExcel(excel *Excel, cells []string) []string {
+func pickCellValues(excel *Excel, cells []string) []string {
 	cols := make([]string, len(cells))
 	for index, cell := range cells {
 		sheet, cellAxis := parseCellArgument(cell)
