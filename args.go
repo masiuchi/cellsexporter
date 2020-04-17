@@ -25,7 +25,7 @@ func (s *strslice) Set(v string) error {
 // ParseArgs ...
 func ParseArgs() *Args {
 	var cells, files strslice
-	flag.Var(&cells, "cell", "sheetName!axis")
+	flag.Var(&cells, "cell", "sheetName/axis")
 	flag.Var(&files, "file", "file")
 	flag.Parse()
 	return &Args{Files: files, Cells: cells}

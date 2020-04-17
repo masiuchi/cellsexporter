@@ -24,7 +24,7 @@ func ProcessFiles(args *Args) {
 func processExcel(excel *Excel, cells []string) []string {
 	cols := make([]string, len(cells))
 	for index, cell := range cells {
-		cellSlice := strings.Split(cell, "!")
+		cellSlice := strings.Split(cell, "/")
 		sheet := cellSlice[0]
 		cellAxis := cellSlice[1]
 		value, err := excel.GetCellValue(sheet, cellAxis)
