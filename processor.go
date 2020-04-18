@@ -8,17 +8,19 @@ import (
 
 // ProcessFiles ...
 func ProcessFiles(args *Args) {
-	data := make([][]string, len(args.Files))
-	dataIndex := 0
+	lines := make([][]string, len(args.Files))
+	lineIndex := 0
 	for _, file := range args.Files {
 		excel, err := LoadExcel(file)
 		if err != nil {
 			panic(err)
 		}
-		data[dataIndex] = pickCellValues(excel, args.Cells)
-		dataIndex = dataIndex + 1
+		line := pickCellValues(excel, args.Cells)
+		lines[lineIndex] = append([]string{file}, line...)
+		lineIndex = lineIndex + 1
 	}
-	PrintAsCsv(args.GetHeaders(), data)
+	headers := args.GetHeaders()
+	PrintAsCsv(append([]string{"file"}, headers...), lines)
 }
 
 func pickCellValues(excel *Excel, cells []string) []string {
