@@ -7,8 +7,9 @@ import (
 
 // Args ...
 type Args struct {
-	Files []string
-	Cells []string
+	Files      []string
+	Cells      []string
+	ExportType string
 }
 
 type strslice []string
@@ -25,10 +26,12 @@ func (s *strslice) Set(v string) error {
 // ParseArgs ...
 func ParseArgs() *Args {
 	var cells, files strslice
+	var exportType string
 	flag.Var(&cells, "cell", "sheetName/axis")
-	flag.Var(&files, "file", "file")
+	flag.Var(&files, "file", "filename")
+	flag.StringVar(&exportType, "type", "json", "json or csv")
 	flag.Parse()
-	return &Args{Files: files, Cells: cells}
+	return &Args{Files: files, Cells: cells, ExportType: exportType}
 }
 
 // GetHeaders ...

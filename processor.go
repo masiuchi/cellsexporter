@@ -18,11 +18,14 @@ func ProcessFiles(args *Args) {
 		lines[i] = append([]string{file}, line...)
 	}
 	headers := append([]string{"_filename"}, args.GetHeaders()...)
-	// if err := PrintAsCsv(headers, lines); err != nil {
-	// 	panic(err)
-	// }
-	if err := PrintAsJSON(headers, lines); err != nil {
-		panic(err)
+	if args.ExportType == "json" {
+		if err := PrintAsJSON(headers, lines); err != nil {
+			panic(err)
+		}
+	} else {
+		if err := PrintAsCsv(headers, lines); err != nil {
+			panic(err)
+		}
 	}
 }
 
