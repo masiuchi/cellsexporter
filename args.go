@@ -3,6 +3,7 @@ package excelpicker
 import (
 	"flag"
 	"fmt"
+	"os"
 )
 
 // Args ...
@@ -31,6 +32,12 @@ func ParseArgs() *Args {
 	flag.Var(&files, "file", "filename")
 	flag.StringVar(&exportType, "type", "json", "json or csv")
 	flag.Parse()
+
+	if len(files) == 0 || len(cells) == 0 {
+		flag.Usage()
+		os.Exit(2)
+	}
+
 	return &Args{Files: files, Cells: cells, ExportType: exportType}
 }
 
