@@ -9,18 +9,21 @@ import (
 // ProcessFiles ...
 func ProcessFiles(args *Args) {
 	lines := make([][]string, len(args.Files))
-	lineIndex := 0
-	for _, file := range args.Files {
+	for i, file := range args.Files {
 		excel, err := LoadExcel(file)
 		if err != nil {
 			panic(err)
 		}
 		line := pickCellValues(excel, args.Cells)
-		lines[lineIndex] = append([]string{file}, line...)
-		lineIndex = lineIndex + 1
+		lines[i] = append([]string{file}, line...)
 	}
-	headers := args.GetHeaders()
-	PrintAsCsv(append([]string{"file"}, headers...), lines)
+	headers := append([]string{"_filename"}, args.GetHeaders()...)
+	// if err := PrintAsCsv(headers, lines); err != nil {
+	// 	panic(err)
+	// }
+	if err := PrintAsJSON(headers, lines); err != nil {
+		panic(err)
+	}
 }
 
 func pickCellValues(excel *Excel, cells []string) []string {
