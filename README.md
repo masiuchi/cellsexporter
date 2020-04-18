@@ -2,6 +2,13 @@
 
 Pick cell values from Excel file.
 
+## Build
+
+```
+$ git clone https://github.com/masiuchi/go-excel-picker
+$ make build
+```
+
 ## Usage
 
 `-file` and `-cell` arguments are required.
